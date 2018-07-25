@@ -2,8 +2,8 @@ import React from 'react';
 import RouterConfig from '../../app/router';
 import { Menu, Icon } from 'antd';
 import { Link, Route, Redirect } from 'react-router-dom';
-import Home from '../../route/Home';
 import Page404 from '../../route/exception/Page404';
+
 import './router.css';
 
 const SubMenu = Menu.SubMenu;
@@ -77,26 +77,15 @@ const generateRoute = (arr) => {
         if (item.children && item.children.length > 0) {
             return generateRoute(item.children);
         }
-        let pathStr = "";
-        if (item.path == '/'){
-            pathStr = "Home";
-        } else {
-            let pathArr = item.path.split("/");
-            pathStr = pathArr.map(item => item.substring(0,1).toUpperCase()+item.substring(1)).join("");
-        }
-        let component = () => import(`${pathStr}.js`);
-        console.log(pathStr);
-        if (item.path == '/'){ 
-            RouteArr.push(<Route {...item} component={Home}/>);
+        if(item.title === '首页') {
+            RouteArr.push(<Route {...item} exact />);
         } else {
             RouteArr.push(<Route {...item} />);
         }
     })
 };
 generateRoute();
-// RouteArr.unshift(<Route path="/" component={Home} key="home" exact />);
-RouteArr.push(<Redirect to='/404' component={Page404} key="404" />);
-console.log(RouteArr);
+// RouteArr.push(<Redirect to='/404' component={Page404} key="404" />);
 
 export const MyRouter = Router;
 export const MyRoute = RouteArr;
