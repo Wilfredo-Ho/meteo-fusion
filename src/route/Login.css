@@ -1,0 +1,27 @@
+html, body, #root, .container, .bg-cover{
+    width: 100%;
+    height: 100%;
+}
+.bg-cover{
+    background-image: url(../static/bg.jpg);
+    background-size:cover;
+    filter: blur(4px);
+    position: absolute;
+    top: 0;
+}
+.login-wpt{
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    transform: translate(-40%, -50%);
+    background: rgba(255, 255, 255, .5);
+    width: 320px;
+    border-radius: 6px;
+}
+.login-wpt .title{
+    padding: 16px;
+    text-align: center;
+    background: #d9d9d9;
+    letter-spacing: .2em;
+    margin-bottom: 30px;
+}
