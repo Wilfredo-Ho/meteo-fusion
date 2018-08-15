@@ -3,7 +3,9 @@ import React from 'react';
 class Month extends React.Component {
     render () {
         return (
-            <div>month</div>
+            <div>
+                123456
+            </div>
         )
     }
 }

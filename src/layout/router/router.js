@@ -2,7 +2,7 @@ import React from 'react';
 import RouterConfig from '../../app/router';
 import { Menu, Icon } from 'antd';
 import { Link, Route, Redirect } from 'react-router-dom';
-import Page404 from '../../route/exception/Page404';
+//import Page404 from '../../route/exception/Page404';
 
 import './router.css';
 
@@ -73,18 +73,22 @@ class Router extends React.Component{
 let RouteArr = [];
 const generateRoute = (arr) => {
     arr || ( arr = RouterConfig );
+
     arr.map(item => {
+        console.log(item);
         if (item.children && item.children.length > 0) {
             return generateRoute(item.children);
         }
         if(item.title === '首页') {
             RouteArr.push(<Route {...item} exact />);
         } else {
-            RouteArr.push(<Route {...item} />);
+            RouteArr.push(<Route path={item.path} component={item.component} key={item.key} />);
         }
     })
 };
 generateRoute();
+
+console.log(RouteArr);
 // RouteArr.push(<Redirect to='/404' component={Page404} key="404" />);
 
 export const MyRouter = Router;

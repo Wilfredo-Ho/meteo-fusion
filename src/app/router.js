@@ -3,7 +3,7 @@
 import Home from '../route/Home';
 import TemperatureMonth from '../route/temperature/month';
 import TemperatureDay from '../route/temperature/day';
-import Rain from '../route/rain/rain';
+/*import Rain from '../route/rain/rain';
 import Wind from '../route/wind/wind';
 import Power from '../route/power/power';
 import Radiation from '../route/radiation/radiation';
@@ -11,7 +11,7 @@ import ElectricityMonth from '../route/electricity/month';
 import ElectricityCompare from '../route/electricity/compare';
 import AirFixed from '../route/air/fixed';
 import AirMove from '../route/air/move';
-import AirScan from '../route/air/scan';
+import AirScan from '../route/air/scan';*/
 
 export default [
     {
@@ -38,7 +38,8 @@ export default [
                 component: TemperatureDay
             }
         ]
-    }, {
+    }
+    /*, {
         key: '3',
         icon: 'line-chart',
         title: '年雨量观测数据统计',
@@ -103,5 +104,5 @@ export default [
                 component: AirScan
             }
         ]
-    }
+    }*/
 ];
