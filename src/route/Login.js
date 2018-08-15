@@ -1,31 +1,80 @@
 import React from 'react';
 import "./Login.css";
-import { Icon, Input, Button, Checkbox } from 'antd';
+import { Icon, Input, Button, Checkbox, Form, notification  } from 'antd';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+
+const FormItem = Form.Item;
 
 class Login extends React.Component {
 
-    login () {
-        alert();
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                axios.post("/users/login", values)
+                .then(response => response.data)
+                .then(res => {
+                    if(res.status === '0') {
+                        //登陆成功跳转
+                        this.props.history.push("/");
+                    } else {
+                        notification.error({
+                            message: '登录失败',
+                            description: res.msg
+                        })
+                    }
+                })
+            }
+        });
     }
 
     render () {
-        return (
-            <div class="container">
-                <div className="bg-cover">
-                    
-                </div>
-                <div className="login-wpt">
-                    <h3 className="title">测试平台登录</h3>
-                    <div className="content"  style={{ width: '80%', margin: '0 auto'}}>
-                        <Input type="text" placeholder="用户名" prefix={<Icon type="user" />} style={{marginBottom: 16}} />
-                        <Input type="password" placeholder="密码" prefix={<Icon type="lock" />} style={{marginBottom: 16}} />
-                        <Checkbox style={{marginBottom: 16}}>记住密码</Checkbox>
-                        <Button onClick={this.login} type="primary" style={{width: '100%', marginBottom: 30}}>登录</Button>
+            const { getFieldDecorator } = this.props.form;
+            return (
+                <div className="container">
+                    <div className="bg-cover" />
+                    <div className="login-wpt">
+                        <h3 className="title">测试平台登录</h3>
+                        <div className="content"  style={{ width: '80%', margin: '0 auto'}}>
+                            <Form onSubmit={this.handleSubmit} className="login-form">
+                                <FormItem>
+                                {getFieldDecorator('userName', {
+                                    rules: [{ required: true, message: 'Please input your username!' }],
+                                })(
+                                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                                )}
+                                </FormItem>
+                                <FormItem>
+                                {getFieldDecorator('password', {
+                                    rules: [{ required: true, message: 'Please input your Password!' }],
+                                })(
+                                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                                )}
+                                </FormItem>
+                                <FormItem>
+                                {getFieldDecorator('remember', {
+                                    valuePropName: 'checked',
+                                    initialValue: true,
+                                })(
+                                    <Checkbox>Remember me</Checkbox>
+                                )}
+                                <a className="login-form-forgot" href="">Forgot password</a>
+                                <Button type="primary" htmlType="submit" className="login-form-button">
+                                    Log in
+                                </Button>
+                                Or <a href="">register now!</a>
+                                </FormItem>
+                            </Form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
     }
 }
 
-export default Login;
+const WrappedLoginForm = Form.create()(Login);
+
+const RouterLogin = withRouter(WrappedLoginForm);
+
+export default RouterLogin;
