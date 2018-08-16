@@ -33,7 +33,7 @@ class Header extends React.Component{
         axios.get("/users/logout")
             .then(response => {
                 let res = response.data;
-                if(res.status == '0') {
+                if(res.status === '0') {
                     this.props.history.push("/login");
                 }
             })

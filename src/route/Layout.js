@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import MyHeader from '../layout/header/Header';
 import { MyRouter, MyRoute } from '../router/router';
+import { Switch } from 'react-router-dom';
 import "../App.css";
 
 const { Header, Content, Sider } = Layout;
@@ -43,7 +44,9 @@ class MyLayout extends Component {
             <MyRouter />
           </Sider>
           <Content>
-            {MyRoute}
+              <Switch>
+                  {MyRoute}
+              </Switch>
           </Content>
         </Layout>
       </Layout>

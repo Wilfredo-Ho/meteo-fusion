@@ -2,7 +2,7 @@ import React from 'react';
 import RouterConfig from './config';
 import AllComponents from '../route';
 import { Menu, Icon } from 'antd';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Redirect } from 'react-router-dom';
 
 import './router.css';
 
@@ -65,7 +65,6 @@ class Router extends React.Component{
 }
 
 const RouteArr = RouterConfig.map(r => {
-    
     const route = r => {
         const Component = AllComponents[r.component];
         return (
@@ -79,6 +78,8 @@ const RouteArr = RouterConfig.map(r => {
     }
     return r.component ? route(r) : r.children.map(r => route(r));
 });
+
+RouteArr.push(<Route key="404" render={() => <Redirect to="/404" />} />);
 
 export const MyRouter = Router;
 
