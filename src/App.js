@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Login from './route/Login';
-import Home from './route/Home';
+import Layout from './route/Layout';
 import NotFound from './route/exception/Page404';
 
 class App extends Component {
   render() {
     return (
-        <Switch>
-            <Route component={Login} path="/login" />
-            <Route component={Home} path="/" />
-            <Route component={NotFound} />
-        </Switch>
-    )
+      <Switch>
+        <Route exact component={Login} path="/login" />
+        <Route component={Layout} path="/" />
+        <Route component={NotFound} />
+      </Switch>
+    );
   }
 }
 

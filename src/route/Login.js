@@ -1,30 +1,29 @@
 import React from 'react';
 import "./Login.css";
+import { Icon, Input, Button, Checkbox, Form, notification  } from 'antd';
 import { withRouter } from 'react-router-dom';
-import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import axios from 'axios';
 
 const FormItem = Form.Item;
 
 class Login extends React.Component {
-
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 axios.post("/users/login", values)
-                    .then(response => response.data)
-                    .then(res => {
-                        if (res.status == 0) {
-                            this.props.history.push('/');
-                        } else {
-                            message.error(res.msg);
-                        }
-                    })
-                    .catch(e => {
-                        message.error(e.message);
-                    });
-                console.log("request server: ", values);
+                .then(response => response.data)
+                .then(res => {
+                    if (res.status === '0') {
+                        //登陆成功跳转
+                        this.props.history.push("/");
+                    } else {
+                        notification.error({
+                            message: '登录失败',
+                            description: res.msg
+                        })
+                    }
+                })
             }
         });
     }
@@ -68,8 +67,7 @@ class Login extends React.Component {
                         </Form>
                     </div>
                 </div>
-            </div>
-        );
+            );
     }
 }
 

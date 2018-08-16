@@ -11,7 +11,7 @@ class Header extends React.Component{
         super(props);
         this.state = {
             user: ''
-        }
+        };
         this.logout = this.logout.bind(this);
     }
 
@@ -19,10 +19,10 @@ class Header extends React.Component{
         axios.get("/users/check")
         .then(response => {
             let res = response.data;
-            if(res.status == '0') {
+            if(res.status === '0') {
                 this.setState({
                     user: res.result
-                })
+                });
             } else {
                 this.props.history.push("/login");
             }
