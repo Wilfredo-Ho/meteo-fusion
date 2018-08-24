@@ -10,23 +10,6 @@ const { Header, Content, Sider } = Layout;
 class MyLayout extends Component {
   constructor (props) {
     super(props);
-    this.state = {
-      height: 200
-    }
-  }
-
-  componentWillMount () {
-    this.setState({
-      height: window.innerHeight - 64
-    })
-  }
-
-  componentDidMount () {
-    window.addEventListener("resize", () => {
-      this.setState({
-        height: window.innerHeight - 64
-      })
-    })
   }
 
   componentWillUnmount () {
@@ -35,12 +18,12 @@ class MyLayout extends Component {
 
   render() {
     return (
-      <Layout>
+      <Layout style={{width: '100%', height: '100%'}}>
         <Header style={{ padding: '0 20px' }}>
           <MyHeader />
         </Header>
-        <Layout>
-          <Sider width={256} style={{ height: this.state.height }}>
+        <Layout style={{minHeight: 'calc(100% - 64px)'}}>
+          <Sider width={256}>
             <MyRouter />
           </Sider>
           <Content>

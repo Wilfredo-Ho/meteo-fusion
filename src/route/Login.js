@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Login.css";
+import "./Login.less";
 import { Icon, Input, Button, Checkbox, Form, notification  } from 'antd';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';

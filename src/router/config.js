@@ -8,17 +8,17 @@ export default [
     }, {
         key: '2',
         icon: 'area-chart',
-        title: '温度观测数据统计',
+        title: '历史温度数据统计',
         path: '',
         children: [
             {
                 key: '2-1',
-                title: '年月温度统计',
+                title: '按月统计',
                 path: '/temperature/month',
                 component: 'TemperatureMonth'
             }, {
                 key: '2-2',
-                title: '年日温度统计',
+                title: '按日统计',
                 path: '/temperature/day',
                 component: 'TemperatureDay'
             }
